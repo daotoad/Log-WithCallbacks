@@ -1,6 +1,15 @@
-html/docs.css
+Build.PL
+Changes
+examples/log_levels.pl
+examples/MyDebugLog.pm
 lib/Log/WithCallbacks.pm
 Makefile.PL
 MANIFEST			This list of files
-META.yml
+MANIFEST.SKIP
+README
+t/00-load.t
 t/Basic.t
+t/boilerplate.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t

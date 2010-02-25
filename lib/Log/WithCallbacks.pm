@@ -1,6 +1,8 @@
 package Log::WithCallbacks;
 
 use strict;
+use warnings;
+
 use Carp;
 use Symbol;
 use Fcntl;
@@ -8,7 +10,7 @@ use IO::File;
 
 use vars qw( $VERSION );
 
-$VERSION = '1.00';
+$VERSION = '1.01_0';
 
 my $standard_format = sub {
     my $message = shift;
@@ -85,14 +87,11 @@ sub exit {
     my $self = shift;
 
     my $error_code = shift;
-    my ($message) = @_;
 
-    $self->entry("Script terminating - $error_code", @_);
-
-    $self->entry( @_ );
+    my $message = $self->entry(@_);
     
     $!=$error_code;
-    croak "$message";
+    die "$message";
 }
 
 sub entry {
@@ -108,7 +107,7 @@ sub entry {
             ( $format ne 'standard'  ) 
         );
 
-    $format = $standard_format if $format eq 'standard';
+    $format = $standard_format if defined $format and $format eq 'standard';
     
     $format = $self->{'format'} unless ref($format) eq 'CODE';
 

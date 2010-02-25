@@ -1,6 +1,8 @@
 #!/usr/bin/perl
 
 use strict;
+use warnings;
+
 use Test::More;
 
 # Print the plan before module loads.
